@@ -19,12 +19,21 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Instalar Node.js
-      uses: actions/setup-node@v18
+      uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: '18'
+
+    - name: Limpiar caché de npm
+      run: npm cache clean --force
+
+    - name: Eliminar node_modules
+      run: rm -rf node_modules
 
     - name: Instalar dependencias
       run: npm install
 
+    - name: Dar permisos de ejecución a jest
+      run: chmod +x node_modules/.bin/jest
+
     - name: Ejecutar pruebas
-      run: npm test
+      run: npx jest
