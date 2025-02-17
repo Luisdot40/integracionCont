@@ -18,6 +18,10 @@ jobs:
     - name: Checkout del código
       uses: actions/checkout@v2
 
+    - name: Limpiar la caché de npm
+      run: |
+        npm cache clean --force
+
     - name: Instalar Node.js
       uses: actions/setup-node@v3
       with:
@@ -28,4 +32,3 @@ jobs:
 
     - name: Ejecutar pruebas
       run: npm test
-
